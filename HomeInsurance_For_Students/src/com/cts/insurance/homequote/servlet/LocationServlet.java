@@ -80,7 +80,8 @@ public class LocationServlet extends HttpServlet{
 			dispatcher.forward(request, response);
 		} catch (Exception e) {
 			//Fill code here
-				logger.error("Exception occurred in method LocationServlet.doPost :: " + e);
+				logger.error("Exception occurred in method LocationServlet.doPost :: " + 
+						e);
 				request.setAttribute("message", e.getMessage());
 				final RequestDispatcher dispatcher = request.getRequestDispatcher(HomeInsuranceConstants.ERROR);
 				dispatcher.forward(request, response);
