@@ -24,7 +24,12 @@ public class LoginBO {
 		final LoginDAO loginDAO = new LoginDAO();
 		User user = null;
 		//Fill code here
-		
+		try {
+			user = loginDAO.getUser(userName);
+		} catch (HomequoteSystemException e) {
+			// TODO Auto-generated catch block
+			throw new HomequoteBusinessException(e.getMessage());
+		}
 		return user;
 	}
 	
@@ -37,5 +42,11 @@ public class LoginBO {
 
 		final LoginDAO loginDAO = new LoginDAO();
 		//Fill code here
+		try {
+			loginDAO.saveUser(user);
+		} catch (HomequoteSystemException e) {
+			// TODO Auto-generated catch block
+			throw new HomequoteBusinessException(e.getMessage());
+		}
 	}
 }

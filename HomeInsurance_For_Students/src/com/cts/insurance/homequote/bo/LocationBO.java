@@ -7,6 +7,7 @@
  */
 package com.cts.insurance.homequote.bo;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.cts.insurance.homequote.dao.LocationDAO;
@@ -25,8 +26,14 @@ public class LocationBO {
 
 		final LocationDAO locationDAO = new LocationDAO();
 		//Fill code here
-		
-		return 0; //return integer
+		int locationInt = -1;
+		try {
+			locationInt = locationDAO.saveLocation(location);
+		} catch (HomequoteSystemException e) {
+			// TODO Auto-generated catch block
+			throw new HomequoteBusinessException(e.getMessage());
+		}
+		return locationInt; //return integer
 	}
 	
 	/**
@@ -37,8 +44,14 @@ public class LocationBO {
 
 		final LocationDAO locationDAO = new LocationDAO();
 		//Fill code here
-		
-		return null; //return Object
+		Location location = new Location();
+		try {
+			location = locationDAO.getLocation(quoteId);
+		} catch (HomequoteSystemException e) {
+			// TODO Auto-generated catch block
+			throw new HomequoteBusinessException(e.getMessage());
+		}
+		return location; //return Object
 	}
 	
 	/**
@@ -49,8 +62,14 @@ public class LocationBO {
 
 		final LocationDAO locationDAO = new LocationDAO();
 		//Fill code here
-		
-		return null; //return    lst of Object
+		List<Location> quoteIds = new ArrayList<Location>();
+		try {
+			quoteIds = locationDAO.getQuoteIds(userName);
+		} catch (HomequoteSystemException e) {
+			// TODO Auto-generated catch block
+			throw new HomequoteBusinessException(e.getMessage());
+		}
+		return quoteIds; //return    lst of Object
 	}
 	
 }

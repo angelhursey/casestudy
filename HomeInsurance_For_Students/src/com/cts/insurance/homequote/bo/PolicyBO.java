@@ -9,6 +9,7 @@ package com.cts.insurance.homequote.bo;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
@@ -55,10 +56,16 @@ public class PolicyBO {
 	 */
 	public List<Policy> getPolicies(final String userName) throws HomequoteBusinessException {
 
-		final PolicyDAO poilcyDAO = new PolicyDAO();
+		final PolicyDAO policyDAO = new PolicyDAO();
 		//Fill code here
-		
-		return null; //return list of Object
+		List<Policy> policyList = new ArrayList<Policy>();
+		try {
+			policyList = policyDAO.getPolicies(userName);
+		} catch (HomequoteSystemException e) {
+			// TODO Auto-generated catch block
+			throw new HomequoteBusinessException(e.getMessage());
+		}
+		return policyList; //return list of Object
 	}
 	
 	/**
@@ -68,10 +75,16 @@ public class PolicyBO {
 	 */
 	public Policy cancelPolicy(final String policyKey) throws HomequoteBusinessException {
 
-		final PolicyDAO poilcyDAO = new PolicyDAO();
+		final PolicyDAO policyDAO = new PolicyDAO();
 		//Fill code here
-		
-		return null; //return Object
+		Policy policy = new Policy();
+		try {
+			policy = policyDAO.cancelPolicy(policyKey);
+		} catch (HomequoteSystemException e) {
+			// TODO Auto-generated catch block
+			throw new HomequoteBusinessException(e.getMessage());
+		}
+		return policy; //return Object
 	}
 	
 	/**
@@ -81,9 +94,16 @@ public class PolicyBO {
 	 */
 	public Policy renewPolicy(final String policyKey) throws HomequoteBusinessException {
 
-		final PolicyDAO poilcyDAO = new PolicyDAO();
+		final PolicyDAO policyDAO = new PolicyDAO();
 		//Fill code here
-		return null; //return Object
+		Policy policy = new Policy();
+		try {
+			policy = policyDAO.renewPolicy(policyKey);
+		} catch (HomequoteSystemException e) {
+			// TODO Auto-generated catch block
+			throw new HomequoteBusinessException(e.getMessage());
+		}
+		return policy; //return Object
 	}
 	/**
 	 * @param policyEffectiveDate
@@ -92,6 +112,11 @@ public class PolicyBO {
 	private String getDateAfterOneYear(final String policyEffDate) throws ParseException
 	{
 		//Fill code here
-		return null; //return String
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(sdf.parse(policyEffDate));
+		cal.add(Calendar.YEAR, 1);
+		
+		return sdf.format(cal.getTime()); //return String
 	}
 }

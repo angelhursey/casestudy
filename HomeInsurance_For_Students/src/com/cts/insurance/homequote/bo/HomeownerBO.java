@@ -26,11 +26,13 @@ public class HomeownerBO {
 
 		final HomeownerDAO HomeownerDAO = new HomeownerDAO();
        //Fill code here
+		Homeowner homeowner = new Homeowner();
 		try {
-			return HomeownerDAO.getHomeowner(quoteId);
+			homeowner = HomeownerDAO.getHomeowner(quoteId);
 		} catch (HomequoteSystemException e) {
-		return null; //return Object
+			throw new HomequoteBusinessException(e.getMessage());
 		}
+		return homeowner;
 	}
 	/**
 	 * @param homeowner
@@ -40,5 +42,11 @@ public class HomeownerBO {
 
 		final HomeownerDAO HomeownerDAO = new HomeownerDAO();
         //Fill code here
+		try {
+			HomeownerDAO.saveHomeowner(homeowner);
+		} catch (HomequoteSystemException e) {
+			// TODO Auto-generated catch block
+			throw new HomequoteBusinessException(e.getMessage());
+		}
 	}
 }

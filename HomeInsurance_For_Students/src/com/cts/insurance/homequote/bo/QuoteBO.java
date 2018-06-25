@@ -72,7 +72,14 @@ public class QuoteBO {
 		final String location = loc.getResidenceType();
 		//Add 0.5, .06, .07 percentage of premium
 		//Fill code here
-		return 0.0; //return double
+		if(location.equals("Single-Family Home")) {
+			premium *= 1.0005;
+		}else if(location.equals("Condo") || location.equals("Duplex") || location.equals("Apartment")) {
+			premium *= 1.0006;
+		}else {
+			premium *= 1.0007;
+		}
+		return premium; //return double
 	}
 
 	/**
@@ -83,7 +90,16 @@ public class QuoteBO {
 	private int getHomeValue(final Property property, final int numYearsOld) {
 		int homeValue = property.getSquareFootage() * HomeInsuranceConstants.CONS_COST_PER_SF;
 		//Fill code here
-		return 0;//return integer
+		if(numYearsOld <= 5) {
+			homeValue *= .9;
+		}else if (numYearsOld <= 10) {
+			homeValue *= .8;
+		}else if (numYearsOld <= 20) {
+			homeValue *= .7;
+		}else {
+			homeValue *= .5;
+		}
+		return homeValue;//return integer
 	}
 	
 	/**
@@ -95,7 +111,14 @@ public class QuoteBO {
 
 		final QuoteDAO quoteDAO = new QuoteDAO();
 		//Fill code here
-		return null;//return Object
+		Quote quote = new Quote();
+		try {
+			quote = quoteDAO.getQuote(quoteId);
+		} catch (HomequoteSystemException e) {
+			// TODO Auto-generated catch block
+			throw new HomequoteBusinessException(e.getMessage());
+		}
+		return quote;//return Object
 	}
 	
 	/**
@@ -105,5 +128,11 @@ public class QuoteBO {
 
 		final QuoteDAO quoteDAO = new QuoteDAO();
 		//Fill code here
+		try {
+			quoteDAO.saveQuote(quote);
+		} catch (HomequoteSystemException e) {
+			// TODO Auto-generated catch block
+			throw new HomequoteBusinessException(e.getMessage());
+		}
 	}
 }
