@@ -13,9 +13,9 @@ public final class SqlQueries {
 	public static final String SELECT_USER = "SELECT * FROM Login where USER_NAME = ?";
 	public static final String SAVE_USER = "INSERT INTO Login (USER_NAME, USER_PWD) VALUES(?, ?)";
 
-	public static final String SAVE_LOCATION = "INSERT INTO Locations (QUOTE_ID, RESIDENCE_TYPE, " +
-			"ADDRESS_LINE_1, ADDRESS_LINE_2, CITY, STATE, ZIP, RESIDENCE_USE, USER_NAME) " +
-			"VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, ?)";
+	public static final String SAVE_LOCATION = "INSERT INTO Locations (QUOTE_ID, RESIDENT_TYPE, " +
+			"ADDRESS_LINE_1, ADDRESS_LINE_2, CITY, LOCATION_STATE, ZIP, RESIDENCE_USE, USERNAME) " +
+			"VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 	public static final String GET_QUOTE_ID = "SELECT QUOTE_ID from Location where RESIDENCE_TYPE = ? and " +
 			"ADDRESS_LINE_1 = ? and ADDRESS_LINE_2 = ? and CITY = ? and STATE = ? and ZIP = ? and RESIDENCE_USE = ? and USER_NAME = ?";
 	
@@ -39,13 +39,13 @@ public final class SqlQueries {
 	public static final String GET_ALL_DETAILS = "select * from Locations l, HomeownerInfo h, Propertys p, Quote q " +
 			"where l.QUOTE_ID = ? and h.QUOTE_ID = l.QUOTE_ID and p.QUOTE_ID = l.QUOTE_ID and q.QUOTE_ID = l.QUOTE_ID";
 	
-	public static final String SAVE_POLICY = "INSERT INTO Policys (POLICY_KEY, QUOTE_ID, POLICY_EFFECTIVE_DATE, " +
+	public static final String SAVE_POLICY = "INSERT INTO Policies (POLICY_KEY, QUOTE_ID, POLICY_EFFECTIVE_DATE, " +
 			"POLICY_END_DATE, POLICY_TERM, POLICY_STATUS) VALUES (?, ?, ?, ?, ?, ?)";
 	
-	public static final String GET_POLICIES = "SELECT * from Policys p, Locations l where p.QUOTE_ID= l.QUOTE_ID and l.USER_NAME = ?";
-	public static final String GET_POLICY = "SELECT * from Policys where POLICY_KEY = ?";
-	public static final String RENEW_POLICY = "UPDATE Policys SET POLICY_TERM = POLICY_TERM + 1, POLICY_STATUS = 'RENEWED' where POLICY_KEY = ?";
-	public static final String CANCEL_POLICY = "UPDATE Policys SET POLICY_STATUS = 'CANCELLED', POLICY_END_DATE=? where POLICY_KEY = ?";
+	public static final String GET_POLICIES = "SELECT * from Policies p, Locations l where p.QUOTE_ID= l.QUOTE_ID and l.USER_NAME = ?";
+	public static final String GET_POLICY = "SELECT * from Policies where POLICY_KEY = ?";
+	public static final String RENEW_POLICY = "UPDATE Policies SET POLICY_TERM = POLICY_TERM + 1, POLICY_STATUS = 'RENEWED' where POLICY_KEY = ?";
+	public static final String CANCEL_POLICY = "UPDATE Policies SET POLICY_STATUS = 'CANCELLED', POLICY_END_DATE=? where POLICY_KEY = ?";
 	// PRIVATE //
 
 	  /**
