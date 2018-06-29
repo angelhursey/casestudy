@@ -57,31 +57,17 @@ public class LocationServlet extends HttpServlet{
 				location.setResidenceUse(request.getParameter(HomeInsuranceConstants.RESIDENCE_USE));
 				location.setState(request.getParameter(HomeInsuranceConstants.STATE));
 				location.setZip(request.getParameter(HomeInsuranceConstants.ZIP));
+				location.setUserName(request.getParameter(HomeInsuranceConstants.USER_NAME));
 				
-				
-				
-				if(session.getAttribute("user") != null)
-				{
-					final User user = (User)session.getAttribute("user");
-					location.setUserName(user.getUserName());
-				}
-				else
-				{
-					String message = "Username not retrieved after registration page in method LocationServlet.doPost";
-					logger.error(message);
-					throw new HomequoteSystemException(message);
-				}
-				final LocationBO locationBo = new LocationBO();
-				locationBo.saveHomeLocation(location);
 				session.setAttribute("location", location);
+				String forwardPage = HomeInsuranceConstants.HOMEOWNER_INFO;
+				final RequestDispatcher dispatcher = request.getRequestDispatcher(forwardPage);
+				dispatcher.forward(request, response);
 				
 			}
-			final RequestDispatcher dispatcher = request.getRequestDispatcher(HomeInsuranceConstants.HOMEOWNER_INFO);
-			dispatcher.forward(request, response);
 		} catch (Exception e) {
 			//Fill code here
-				logger.error("Exception occurred in method LocationServlet.doPost :: " + 
-						e);
+				logger.error("Exception occurred in method LocationServlet.doPost :: " + e);
 				request.setAttribute("message", e.getMessage());
 				final RequestDispatcher dispatcher = request.getRequestDispatcher(HomeInsuranceConstants.ERROR);
 				dispatcher.forward(request, response);

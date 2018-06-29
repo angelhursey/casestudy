@@ -52,7 +52,7 @@ public class PropertyServlet extends HttpServlet{
 					property.setMarketValue(Integer.parseInt(request.getParameter(HomeInsuranceConstants.MARKET_VALUE)));
 					property.setYearBuilt(Integer.parseInt(request.getParameter(HomeInsuranceConstants.YEAR_BUILT)));
 					property.setSquareFootage(Integer.parseInt(request.getParameter(HomeInsuranceConstants.SQUARE_FOOTAGEG)));
-					property.setDwellingStyle(Integer.parseInt(request.getParameter(HomeInsuranceConstants.DWELLING_STYLE)));
+					property.setDwellingStyle(Double.parseDouble(request.getParameter(HomeInsuranceConstants.DWELLING_STYLE)));
 					property.setRoofMaterial(request.getParameter(HomeInsuranceConstants.ROOF_MATERIAL));
 					property.setGarageType(request.getParameter(HomeInsuranceConstants.GARAGE_TYPE));
 					property.setNumFullBaths(Integer.parseInt(request.getParameter(HomeInsuranceConstants.NUM_FULL_BATHS)));
@@ -61,8 +61,8 @@ public class PropertyServlet extends HttpServlet{
 					
 					if(session.getAttribute("location") != null)
 					{
-						final Location location = (Location)session.getAttribute("location");
-						property.setQuoteId(location.getQuoteId());
+//						final Location location = (Location)session.getAttribute("location");
+//						property.setQuoteId(location.getQuoteId());
 					}
 					final PropertyBO propertyBo = new PropertyBO();
 					propertyBo.saveProperty(property);
