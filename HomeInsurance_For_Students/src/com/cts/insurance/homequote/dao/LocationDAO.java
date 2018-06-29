@@ -52,20 +52,20 @@ public class LocationDAO {
 			
 			//"SELECT QUOTE_ID from Location where RESIDENCE_TYPE = ? and " +
 			//"ADDRESS_LINE_1 = ? and ADDRESS_LINE_2 = ? and CITY = ? and STATE = ? and ZIP = ? and RESIDENCE_USE = ? and USER_NAME = ?)";
-			stmt = conn.prepareStatement(SqlQueries.GET_QUOTE_ID);
-			stmt.setString(1, location.getResidenceType());
-			stmt.setString(2, location.getAddressLine1());
-			stmt.setString(3, location.getAddressLine2());
-			stmt.setString(4, location.getCity());
-			stmt.setString(5, location.getState());
-			stmt.setString(6, location.getZip());
-			stmt.setString(7, location.getResidenceUse());
-			stmt.setString(8, location.getUserName());
-			stmt.executeQuery();
-			resultSet = stmt.executeQuery();
-			if (resultSet.next()) {
-				quoteId = resultSet.getInt(1);
-			}
+//			stmt = conn.prepareStatement(SqlQueries.GET_QUOTE_ID);
+//			stmt.setString(1, location.getResidenceType());
+//			stmt.setString(2, location.getAddressLine1());
+//			stmt.setString(3, location.getAddressLine2());
+//			stmt.setString(4, location.getCity());
+//			stmt.setString(5, location.getState());
+//			stmt.setString(6, location.getZip());
+//			stmt.setString(7, location.getResidenceUse());
+//			stmt.setString(8, location.getUserName());
+//			stmt.executeQuery();
+//			resultSet = stmt.executeQuery();
+//			if (resultSet.next()) {
+//				quoteId = resultSet.getInt(1);
+//			}
 		}
 		catch (SQLException e)
 		{

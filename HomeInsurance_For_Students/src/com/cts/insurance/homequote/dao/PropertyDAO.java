@@ -96,7 +96,7 @@ public class PropertyDAO {
 			stmt.setInt(2, property.getMarketValue());
 			stmt.setInt(3, property.getYearBuilt());
 			stmt.setInt(4, property.getSquareFootage());
-			stmt.setInt(5, property.getDwellingStyle());
+			stmt.setDouble(5, property.getDwellingStyle());
 			stmt.setString(6, property.getRoofMaterial());
 			stmt.setString(7, property.getGarageType());
 			stmt.setInt(8, property.getNumFullBaths());
